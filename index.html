@@ -15,8 +15,18 @@
       --red:#9A4A3C;--cream:#F2ECE0;--muted:#A89B89;
     }
     *{margin:0;padding:0;box-sizing:border-box;}
-    html{scroll-behavior:smooth;background:var(--dark);}
-    body{background:var(--dark);color:var(--cream);font-family:'Inter',sans-serif;font-weight:300;line-height:1.75;-webkit-font-smoothing:antialiased;}
+    html{scroll-behavior:smooth;background:#0b0907;}
+    body{color:var(--cream);font-family:'Inter',sans-serif;font-weight:300;line-height:1.75;-webkit-font-smoothing:antialiased;position:relative;background:#0b0907;}
+    /* fixed ambient gradient backdrop (inspired by original glow) */
+    body::before{content:'';position:fixed;inset:0;z-index:-2;
+      background:
+        radial-gradient(ellipse 70% 50% at 50% -5%, rgba(194,160,107,.16), transparent 60%),
+        radial-gradient(ellipse 90% 60% at 15% 25%, rgba(154,74,60,.12), transparent 55%),
+        radial-gradient(ellipse 90% 60% at 85% 75%, rgba(194,160,107,.10), transparent 55%),
+        linear-gradient(165deg, #14100b 0%, #0f0c08 45%, #0b0907 100%);}
+    /* subtle film grain / dot texture over the gradient */
+    body::after{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.35;
+      background-image:radial-gradient(rgba(194,160,107,.10) 1px, transparent 1px);background-size:30px 30px;}
     svg.ic-svg{display:inline-block;vertical-align:middle;stroke:var(--gold);stroke-width:1.2;fill:none;stroke-linecap:round;stroke-linejoin:round;}
 
     /* LANGUAGE */
@@ -36,7 +46,7 @@
     /* NAV */
     nav{position:fixed;top:0;left:0;right:0;z-index:900;background:rgba(13,10,8,.86);backdrop-filter:blur(14px);border-bottom:1px solid var(--line-soft);display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:34px;padding:0 130px 0 26px;height:66px;}
     nav .nlogo{position:absolute;left:22px;top:50%;transform:translateY(-50%);display:flex;align-items:center;gap:10px;text-decoration:none;}
-    nav .nlogo img{height:46px;width:auto;background:#f5f0e6;padding:5px 8px;border-radius:5px;}
+    nav .nlogo img{height:48px;width:auto;}
     nav .nlogo .nl-txt{font-family:'Cormorant Garamond',serif;font-size:1.05rem;letter-spacing:2px;color:var(--cream);font-weight:600;}
     nav .nlogo .nl-txt span{color:var(--gold);}
     nav a.nlink{color:var(--muted);text-decoration:none;font-size:11px;letter-spacing:1.8px;text-transform:uppercase;font-weight:500;transition:color .25s;white-space:nowrap;position:relative;}
@@ -48,17 +58,16 @@
     .hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;position:relative;padding:120px 24px 96px;border-bottom:1px solid var(--line-soft);overflow:hidden;}
     .hero-bg{position:absolute;inset:0;z-index:0;
       background:
-        radial-gradient(ellipse 90% 65% at 50% 38%, rgba(194,160,107,.10), transparent 70%),
-        radial-gradient(ellipse 120% 80% at 50% 120%, rgba(154,74,60,.10), transparent 60%),
-        radial-gradient(circle at 50% 40%, #1a1611 0%, #110d0a 55%, #0b0907 100%);}
-    .hero-bg::after{content:'';position:absolute;inset:0;opacity:.5;
+        radial-gradient(ellipse 80% 55% at 50% 40%, rgba(194,160,107,.14), transparent 65%),
+        radial-gradient(ellipse 120% 80% at 50% 120%, rgba(154,74,60,.12), transparent 60%);}
+    .hero-bg::after{content:'';position:absolute;inset:0;opacity:.45;
       background-image:radial-gradient(rgba(194,160,107,.18) 1px, transparent 1px);background-size:26px 26px;
       -webkit-mask-image:radial-gradient(ellipse 70% 70% at 50% 45%, #000 30%, transparent 75%);
       mask-image:radial-gradient(ellipse 70% 70% at 50% 45%, #000 30%, transparent 75%);}
     .hero>*{position:relative;z-index:1;}
     .eyebrow{font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:30px;display:inline-flex;align-items:center;gap:14px;}
     .eyebrow::before,.eyebrow::after{content:'';height:1px;width:34px;background:var(--gold);opacity:.5;}
-    .hero-logo{width:clamp(190px,30vw,270px);height:auto;margin-bottom:32px;background:#f5f0e6;padding:22px 30px;border-radius:8px;border:1px solid var(--line);box-shadow:0 16px 50px rgba(0,0,0,.55);}
+    .hero-logo{width:clamp(220px,34vw,330px);height:auto;margin-bottom:30px;filter:drop-shadow(0 12px 44px rgba(0,0,0,.6)) drop-shadow(0 0 60px rgba(194,160,107,.18));}
     h1.brand{font-family:'Cormorant Garamond',serif;font-size:clamp(3.4rem,11vw,7.5rem);font-weight:600;color:var(--cream);letter-spacing:2px;line-height:.95;margin-bottom:14px;}
     h1.brand span{color:var(--gold);font-style:italic;}
     .sub{font-family:'Inter',sans-serif;font-size:clamp(.7rem,2vw,.8rem);letter-spacing:7px;color:var(--muted);text-transform:uppercase;margin-bottom:30px;}
@@ -86,7 +95,7 @@
     .srule span{color:var(--gold);font-size:11px;letter-spacing:2px;}
 
     /* HOURS */
-    #hours{background:var(--dark3);}
+    #hours{background:transparent;}
     .hgrid{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--line);border-radius:3px;overflow:hidden;margin-bottom:22px;}
     .hcard{background:var(--card);padding:48px 34px;text-align:center;}
     .hcard+.hcard{border-left:1px solid var(--line);}
@@ -97,7 +106,7 @@
     .hnote{text-align:center;color:var(--muted);font-style:italic;font-family:'Cormorant Garamond',serif;font-size:1.1rem;}
 
     /* MENU */
-    #menu{background:var(--dark2);}
+    #menu{background:transparent;}
     .tabs{display:flex;border:1px solid var(--line);border-radius:3px;overflow:hidden;max-width:540px;margin:0 auto 52px;}
     .tb{flex:1;background:transparent;border:none;color:var(--muted);padding:15px 8px;cursor:pointer;font-family:'Inter',sans-serif;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;font-weight:500;transition:all .25s;border-right:1px solid var(--line);}
     .tb:last-child{border-right:none;}
@@ -147,11 +156,11 @@
     .ssl{text-align:center;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin:48px 0 24px;}
 
     /* ABOUT */
-    #about{position:relative;background:var(--dark3);}
+    #about{position:relative;background:transparent;}
     .about-feature{max-width:1060px;margin:0 auto 56px;border:1px solid var(--line);border-radius:4px;overflow:hidden;background:
       radial-gradient(ellipse 70% 90% at 50% 50%, rgba(194,160,107,.08), transparent 70%),
       linear-gradient(160deg,var(--card2),var(--card));padding:54px 30px;text-align:center;}
-    .about-feature img{width:clamp(160px,24vw,210px);height:auto;margin-bottom:28px;background:#f5f0e6;padding:18px 24px;border-radius:8px;border:1px solid var(--line);box-shadow:0 12px 36px rgba(0,0,0,.45);}
+    .about-feature img{width:clamp(180px,26vw,240px);height:auto;margin-bottom:28px;filter:drop-shadow(0 10px 30px rgba(0,0,0,.5)) drop-shadow(0 0 40px rgba(194,160,107,.15));}
     .about-feature p{max-width:620px;margin:0 auto;font-family:'Cormorant Garamond',serif;font-size:1.35rem;font-style:italic;color:var(--cream);line-height:1.6;}
     .g3a{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;border:1px solid var(--line);border-radius:3px;overflow:hidden;}
     .ac{background:var(--card);padding:44px 30px;text-align:center;}
@@ -175,7 +184,7 @@
 
     /* FOOTER */
     footer{background:var(--dark);border-top:1px solid var(--line-soft);padding:54px 24px;text-align:center;}
-    footer .flogo{height:84px;width:auto;margin-bottom:22px;background:#f5f0e6;padding:10px 16px;border-radius:6px;border:1px solid var(--line);}
+    footer .flogo{height:110px;width:auto;margin-bottom:18px;filter:drop-shadow(0 0 30px rgba(194,160,107,.15));}
     footer .br{font-family:'Cormorant Garamond',serif;font-size:1.6rem;color:var(--cream);letter-spacing:2px;margin-bottom:10px;font-weight:600;}
     footer .br span{color:var(--gold);font-style:italic;}
     footer p{color:var(--muted);font-size:.78rem;letter-spacing:.5px;}
@@ -200,7 +209,7 @@
 </div>
 
 <nav>
-  <a href="#hero" class="nlogo"><img src="assets/logo.jpeg" alt="Biffhuset Finnsnes logo"></a>
+  <a href="#hero" class="nlogo"><img src="assets/logo-dark.png" alt="Biffhuset Finnsnes logo"></a>
   <a href="#hero" class="nlink"><span class="no">Hjem</span><span class="en">Home</span></a>
   <a href="#hours" class="nlink"><span class="no">Åpningstider</span><span class="en">Hours</span></a>
   <a href="#menu" class="nlink"><span class="no">Meny</span><span class="en">Menu</span></a>
@@ -211,7 +220,7 @@
 <section class="hero" id="hero">
   <div class="hero-bg" aria-hidden="true"></div>
   <p class="eyebrow">Finnsnes, Norge</p>
-  <img class="hero-logo" src="assets/logo.jpeg" alt="Biffhuset Finnsnes longhorn emblem">
+  <img class="hero-logo" src="assets/logo-dark.png" alt="Biffhuset Finnsnes longhorn emblem">
   <p class="tagline">
     <span class="no">God mat · God stemning · Kvalitet siden første bit</span>
     <span class="en">Great food · Great atmosphere · Quality since the first bite</span>
@@ -372,7 +381,7 @@
     <div class="srule"><span>&#10022;</span></div>
   </div>
   <div class="about-feature">
-    <img src="assets/logo.jpeg" alt="Biffhuset Finnsnes longhorn emblem">
+    <img src="assets/logo-dark.png" alt="Biffhuset Finnsnes longhorn emblem">
     <p>
       <span class="no">«Et ekte biffhus i hjertet av Finnsnes – der kvalitetskjøtt, varm gjestfrihet og gode stunder møtes.»</span>
       <span class="en">"A true steakhouse in the heart of Finnsnes — where quality meat, warm hospitality, and good moments meet."</span>
@@ -413,7 +422,7 @@
 </section>
 
 <footer>
-  <img class="flogo" src="assets/logo.jpeg" alt="Biffhuset Finnsnes logo">
+  <img class="flogo" src="assets/logo-dark.png" alt="Biffhuset Finnsnes logo">
   <div class="br">BIFF<span>HUSET</span> FINNSNES</div>
   <p>Torggata 17 · 9300 Finnsnes · <span class="no">Norge</span><span class="en">Norway</span></p>
   <p><span class="no">God mat · God stemning · Kvalitet siden første bit</span><span class="en">Great food · Great atmosphere · Quality since the first bite</span></p>
