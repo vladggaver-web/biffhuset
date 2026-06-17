@@ -10,7 +10,7 @@
   <style>
     :root{
       --gold:#C2A06B;--gold-light:#D8BE8C;
-      --dark:#100D0A;--dark2:#15110C;--dark3:#191510;--card:#1C1812;--card2:#221D16;
+      --dark:#0D0A08;--dark2:#13100B;--dark3:#171309;--card:#1C1812;--card2:#221D16;
       --line:rgba(194,160,107,.22);--line-soft:rgba(194,160,107,.12);
       --red:#9A4A3C;--cream:#F2ECE0;--muted:#A89B89;
     }
@@ -34,21 +34,35 @@
     .lb:hover:not(.on){color:var(--gold);}
 
     /* NAV */
-    nav{position:fixed;top:0;left:0;right:0;z-index:900;background:rgba(16,13,10,.82);backdrop-filter:blur(14px);border-bottom:1px solid var(--line-soft);display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:34px;padding:0 130px 0 26px;height:64px;}
-    nav a{color:var(--muted);text-decoration:none;font-size:11px;letter-spacing:1.8px;text-transform:uppercase;font-weight:500;transition:color .25s;white-space:nowrap;}
-    nav a:hover{color:var(--gold);}
+    nav{position:fixed;top:0;left:0;right:0;z-index:900;background:rgba(13,10,8,.86);backdrop-filter:blur(14px);border-bottom:1px solid var(--line-soft);display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:34px;padding:0 130px 0 26px;height:66px;}
+    nav .nlogo{position:absolute;left:22px;top:50%;transform:translateY(-50%);display:flex;align-items:center;gap:10px;text-decoration:none;}
+    nav .nlogo img{height:46px;width:auto;background:#f5f0e6;padding:5px 8px;border-radius:5px;}
+    nav .nlogo .nl-txt{font-family:'Cormorant Garamond',serif;font-size:1.05rem;letter-spacing:2px;color:var(--cream);font-weight:600;}
+    nav .nlogo .nl-txt span{color:var(--gold);}
+    nav a.nlink{color:var(--muted);text-decoration:none;font-size:11px;letter-spacing:1.8px;text-transform:uppercase;font-weight:500;transition:color .25s;white-space:nowrap;position:relative;}
+    nav a.nlink::after{content:'';position:absolute;left:0;bottom:-6px;width:0;height:1px;background:var(--gold);transition:width .3s;}
+    nav a.nlink:hover{color:var(--gold);}
+    nav a.nlink:hover::after{width:100%;}
 
     /* HERO */
-    .hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;position:relative;padding:96px 24px;border-bottom:1px solid var(--line-soft);overflow:hidden;}
-    .hero-bg{position:absolute;inset:0;background-image:url('assets/hero.png');background-size:cover;background-position:center;z-index:0;}
-    .hero-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(16,13,10,.78) 0%,rgba(16,13,10,.72) 45%,rgba(16,13,10,.92) 100%);}
+    .hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;position:relative;padding:120px 24px 96px;border-bottom:1px solid var(--line-soft);overflow:hidden;}
+    .hero-bg{position:absolute;inset:0;z-index:0;
+      background:
+        radial-gradient(ellipse 90% 65% at 50% 38%, rgba(194,160,107,.10), transparent 70%),
+        radial-gradient(ellipse 120% 80% at 50% 120%, rgba(154,74,60,.10), transparent 60%),
+        radial-gradient(circle at 50% 40%, #1a1611 0%, #110d0a 55%, #0b0907 100%);}
+    .hero-bg::after{content:'';position:absolute;inset:0;opacity:.5;
+      background-image:radial-gradient(rgba(194,160,107,.18) 1px, transparent 1px);background-size:26px 26px;
+      -webkit-mask-image:radial-gradient(ellipse 70% 70% at 50% 45%, #000 30%, transparent 75%);
+      mask-image:radial-gradient(ellipse 70% 70% at 50% 45%, #000 30%, transparent 75%);}
     .hero>*{position:relative;z-index:1;}
-    .eyebrow{font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:26px;}
-    .hero-mark{margin-bottom:24px;opacity:.9;}
-    h1.brand{font-family:'Cormorant Garamond',serif;font-size:clamp(3.4rem,11vw,7.5rem);font-weight:600;color:var(--cream);letter-spacing:2px;line-height:.95;margin-bottom:12px;}
+    .eyebrow{font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:30px;display:inline-flex;align-items:center;gap:14px;}
+    .eyebrow::before,.eyebrow::after{content:'';height:1px;width:34px;background:var(--gold);opacity:.5;}
+    .hero-logo{width:clamp(190px,30vw,270px);height:auto;margin-bottom:32px;background:#f5f0e6;padding:22px 30px;border-radius:8px;border:1px solid var(--line);box-shadow:0 16px 50px rgba(0,0,0,.55);}
+    h1.brand{font-family:'Cormorant Garamond',serif;font-size:clamp(3.4rem,11vw,7.5rem);font-weight:600;color:var(--cream);letter-spacing:2px;line-height:.95;margin-bottom:14px;}
     h1.brand span{color:var(--gold);font-style:italic;}
     .sub{font-family:'Inter',sans-serif;font-size:clamp(.7rem,2vw,.8rem);letter-spacing:7px;color:var(--muted);text-transform:uppercase;margin-bottom:30px;}
-    .tagline{font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--cream);font-style:italic;margin-bottom:48px;font-weight:500;}
+    .tagline{font-family:'Cormorant Garamond',serif;font-size:1.55rem;color:var(--cream);font-style:italic;margin-bottom:48px;font-weight:500;}
     .hero-hrs{display:flex;gap:0;justify-content:center;margin-bottom:48px;flex-wrap:wrap;border:1px solid var(--line);border-radius:3px;overflow:hidden;background:rgba(16,13,10,.4);}
     .hb{padding:18px 36px;text-align:center;}
     .hb+.hb{border-left:1px solid var(--line);}
@@ -60,13 +74,16 @@
     .scroll-hint::after{content:'';width:1px;height:34px;background:linear-gradient(to bottom,var(--gold),transparent);opacity:.5;}
 
     /* COMMON SECTION */
-    section{padding:104px 24px;}
+    section{padding:104px 24px;position:relative;}
+    section::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:120px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:.4;}
+    #hero::before{display:none;}
     .si{max-width:1060px;margin:0 auto;}
     .sey{text-align:center;font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:12px;}
     .stit{font-family:'Cormorant Garamond',serif;font-size:clamp(2.1rem,5vw,3.1rem);text-align:center;color:var(--cream);margin-bottom:18px;letter-spacing:1px;font-weight:600;}
     .srule{display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:56px;}
-    .srule::before,.srule::after{content:'';height:1px;width:64px;background:var(--gold);opacity:.4;}
-    .srule span{color:var(--gold);font-size:10px;letter-spacing:2px;}
+    .srule::before,.srule::after{content:'';height:1px;width:64px;background:linear-gradient(90deg,transparent,var(--gold));opacity:.5;}
+    .srule::after{background:linear-gradient(90deg,var(--gold),transparent);}
+    .srule span{color:var(--gold);font-size:11px;letter-spacing:2px;}
 
     /* HOURS */
     #hours{background:var(--dark3);}
@@ -113,8 +130,10 @@
     /* DISH CARDS */
     .g2{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--line);border-radius:3px;overflow:hidden;}
     .g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;border:1px solid var(--line);border-radius:3px;overflow:hidden;margin-bottom:24px;}
-    .dc{background:var(--card);padding:32px 28px;display:flex;flex-direction:column;gap:9px;position:relative;border-right:1px solid var(--line);border-bottom:1px solid var(--line);transition:background .25s;}
-    .dc:hover{background:var(--card2);}
+    .dc{background:var(--card);padding:32px 28px;display:flex;flex-direction:column;gap:9px;position:relative;border-right:1px solid var(--line);border-bottom:1px solid var(--line);transition:background .25s,box-shadow .25s;}
+    .dc::before{content:'';position:absolute;top:0;left:0;width:0;height:2px;background:var(--gold);transition:width .35s ease;}
+    .dc:hover{background:var(--card2);box-shadow:inset 0 0 40px rgba(194,160,107,.05);}
+    .dc:hover::before{width:100%;}
     .g2 .dc,.g3 .dc{border-bottom:1px solid var(--line);}
     .dp{position:absolute;top:30px;right:26px;font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--gold);font-weight:600;}
     .dc h3{font-family:'Cormorant Garamond',serif;font-size:1.55rem;color:var(--cream);letter-spacing:.5px;padding-right:72px;font-weight:600;text-transform:none;}
@@ -129,8 +148,11 @@
 
     /* ABOUT */
     #about{position:relative;background:var(--dark3);}
-    .about-img{max-width:1060px;margin:0 auto 56px;border:1px solid var(--line);border-radius:3px;overflow:hidden;}
-    .about-img img{width:100%;height:300px;object-fit:cover;display:block;filter:brightness(.82);}
+    .about-feature{max-width:1060px;margin:0 auto 56px;border:1px solid var(--line);border-radius:4px;overflow:hidden;background:
+      radial-gradient(ellipse 70% 90% at 50% 50%, rgba(194,160,107,.08), transparent 70%),
+      linear-gradient(160deg,var(--card2),var(--card));padding:54px 30px;text-align:center;}
+    .about-feature img{width:clamp(160px,24vw,210px);height:auto;margin-bottom:28px;background:#f5f0e6;padding:18px 24px;border-radius:8px;border:1px solid var(--line);box-shadow:0 12px 36px rgba(0,0,0,.45);}
+    .about-feature p{max-width:620px;margin:0 auto;font-family:'Cormorant Garamond',serif;font-size:1.35rem;font-style:italic;color:var(--cream);line-height:1.6;}
     .g3a{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;border:1px solid var(--line);border-radius:3px;overflow:hidden;}
     .ac{background:var(--card);padding:44px 30px;text-align:center;}
     .ac+.ac{border-left:1px solid var(--line);}
@@ -152,7 +174,8 @@
     .mapwrap iframe{display:block;width:100%;height:300px;border:0;filter:grayscale(.4) brightness(.85);}
 
     /* FOOTER */
-    footer{background:var(--dark);border-top:1px solid var(--line-soft);padding:48px 24px;text-align:center;}
+    footer{background:var(--dark);border-top:1px solid var(--line-soft);padding:54px 24px;text-align:center;}
+    footer .flogo{height:84px;width:auto;margin-bottom:22px;background:#f5f0e6;padding:10px 16px;border-radius:6px;border:1px solid var(--line);}
     footer .br{font-family:'Cormorant Garamond',serif;font-size:1.6rem;color:var(--cream);letter-spacing:2px;margin-bottom:10px;font-weight:600;}
     footer .br span{color:var(--gold);font-style:italic;}
     footer p{color:var(--muted);font-size:.78rem;letter-spacing:.5px;}
@@ -177,19 +200,18 @@
 </div>
 
 <nav>
-  <a href="#hero"><span class="no">Hjem</span><span class="en">Home</span></a>
-  <a href="#hours"><span class="no">Åpningstider</span><span class="en">Hours</span></a>
-  <a href="#menu"><span class="no">Meny</span><span class="en">Menu</span></a>
-  <a href="#about"><span class="no">Om Oss</span><span class="en">About</span></a>
-  <a href="#contact"><span class="no">Kontakt</span><span class="en">Contact</span></a>
+  <a href="#hero" class="nlogo"><img src="assets/logo.jpeg" alt="Biffhuset Finnsnes logo"></a>
+  <a href="#hero" class="nlink"><span class="no">Hjem</span><span class="en">Home</span></a>
+  <a href="#hours" class="nlink"><span class="no">Åpningstider</span><span class="en">Hours</span></a>
+  <a href="#menu" class="nlink"><span class="no">Meny</span><span class="en">Menu</span></a>
+  <a href="#about" class="nlink"><span class="no">Om Oss</span><span class="en">About</span></a>
+  <a href="#contact" class="nlink"><span class="no">Kontakt</span><span class="en">Contact</span></a>
 </nav>
 
 <section class="hero" id="hero">
   <div class="hero-bg" aria-hidden="true"></div>
   <p class="eyebrow">Finnsnes, Norge</p>
-  <svg class="ic-svg hero-mark" width="40" height="40" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2c-3 2-4.5 5-4.5 8 0 2.5 2 4.5 4.5 4.5s4.5-2 4.5-4.5c0-3-1.5-6-4.5-8z"/><path d="M12 14.5V22"/><path d="M8 22h8"/></svg>
-  <h1 class="brand">BIFF<span>HUSET</span></h1>
-  <p class="sub">FINNSNES</p>
+  <img class="hero-logo" src="assets/logo.jpeg" alt="Biffhuset Finnsnes longhorn emblem">
   <p class="tagline">
     <span class="no">God mat · God stemning · Kvalitet siden første bit</span>
     <span class="en">Great food · Great atmosphere · Quality since the first bite</span>
@@ -349,7 +371,13 @@
     <h2 class="stit"><span class="no">Om Biffhuset</span><span class="en">About Biffhuset</span></h2>
     <div class="srule"><span>&#10022;</span></div>
   </div>
-  <div class="about-img"><img src="assets/ambiance.png" alt="Biffhuset restaurant interior"></div>
+  <div class="about-feature">
+    <img src="assets/logo.jpeg" alt="Biffhuset Finnsnes longhorn emblem">
+    <p>
+      <span class="no">«Et ekte biffhus i hjertet av Finnsnes – der kvalitetskjøtt, varm gjestfrihet og gode stunder møtes.»</span>
+      <span class="en">"A true steakhouse in the heart of Finnsnes — where quality meat, warm hospitality, and good moments meet."</span>
+    </p>
+  </div>
   <div class="si">
     <div class="g3a">
       <div class="ac"><div class="ic"><svg class="ic-svg" width="30" height="30" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11h18a8 8 0 0 1-16 0"/><path d="M5 11a7 7 0 0 1 14 0"/><path d="M7 17h10l-1 4H8z"/></svg></div><h3><span class="no">Kvalitetskjøtt</span><span class="en">Quality Meat</span></h3><p><span class="no">Vi serverer kun det beste kjøttet, tilberedt med omhu av erfarne kokker.</span><span class="en">Only the finest cuts, prepared with care by our experienced chefs.</span></p></div>
@@ -385,6 +413,7 @@
 </section>
 
 <footer>
+  <img class="flogo" src="assets/logo.jpeg" alt="Biffhuset Finnsnes logo">
   <div class="br">BIFF<span>HUSET</span> FINNSNES</div>
   <p>Torggata 17 · 9300 Finnsnes · <span class="no">Norge</span><span class="en">Norway</span></p>
   <p><span class="no">God mat · God stemning · Kvalitet siden første bit</span><span class="en">Great food · Great atmosphere · Quality since the first bite</span></p>
