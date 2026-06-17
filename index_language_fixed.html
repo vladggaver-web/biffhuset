@@ -5,16 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Biffhuset Finnsnes</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Playfair+Display:wght@700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
     :root{
-      --gold:#C9963A;--gold-light:#E8B86D;
-      --dark:#0D0D0D;--dark2:#161410;--dark3:#1F1A14;--card:#1A1510;
-      --red:#8B1A1A;--cream:#F0E6D3;--muted:#9A8872;
+      --gold:#B08D57;--gold-light:#C9A66B;
+      --dark:#14110D;--dark2:#1A1611;--dark3:#1E1A14;--card:#211C16;
+      --line:rgba(176,141,87,.18);
+      --red:#7A2E2E;--cream:#EFE8DB;--muted:#9C9082;
     }
     *{margin:0;padding:0;box-sizing:border-box;}
-    html{scroll-behavior:smooth;}
-    body{background:var(--dark);color:var(--cream);font-family:'Inter',sans-serif;font-weight:300;line-height:1.7;}
+    html{scroll-behavior:smooth;background:var(--dark);}
+    body{background:var(--dark);color:var(--cream);font-family:'Inter',sans-serif;font-weight:300;line-height:1.75;-webkit-font-smoothing:antialiased;}
+    svg.ic-svg{display:inline-block;vertical-align:middle;stroke:var(--gold);stroke-width:1.3;fill:none;stroke-linecap:round;stroke-linejoin:round;}
 
     /* LANGUAGE */
     .en{display:none;}
@@ -25,123 +28,136 @@
     body.lang-en span.no{display:none;}
 
     /* LANG TOGGLE */
-    #ltog{position:fixed;top:12px;right:14px;z-index:9999;display:flex;border:1px solid var(--gold);border-radius:4px;overflow:hidden;}
-    .lb{background:transparent;color:var(--gold);border:none;padding:6px 13px;cursor:pointer;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;letter-spacing:1px;transition:all .2s;}
+    #ltog{position:fixed;top:13px;right:16px;z-index:9999;display:flex;border:1px solid var(--line);border-radius:2px;overflow:hidden;background:rgba(20,17,13,.6);}
+    .lb{background:transparent;color:var(--muted);border:none;padding:6px 13px;cursor:pointer;font-family:'Inter',sans-serif;font-size:11px;font-weight:600;letter-spacing:1.5px;transition:all .25s;}
     .lb.on{background:var(--gold);color:var(--dark);}
-    .lb:hover:not(.on){background:rgba(201,150,58,.15);}
+    .lb:hover:not(.on){color:var(--gold);}
 
     /* NAV */
-    nav{position:fixed;top:0;left:0;right:0;z-index:900;background:rgba(13,13,13,.95);backdrop-filter:blur(8px);border-bottom:1px solid rgba(201,150,58,.2);display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:20px;padding:0 120px 0 20px;height:54px;}
-    nav a{color:var(--muted);text-decoration:none;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:500;transition:color .2s;white-space:nowrap;}
+    nav{position:fixed;top:0;left:0;right:0;z-index:900;background:rgba(20,17,13,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:32px;padding:0 120px 0 24px;height:60px;}
+    nav a{color:var(--muted);text-decoration:none;font-size:11px;letter-spacing:1.8px;text-transform:uppercase;font-weight:500;transition:color .25s;white-space:nowrap;}
     nav a:hover{color:var(--gold);}
 
     /* HERO */
-    .hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;position:relative;background:radial-gradient(ellipse at top,rgba(139,26,26,.18) 0%,transparent 60%),radial-gradient(ellipse at center,rgba(201,150,58,.06) 0%,transparent 70%),var(--dark2);padding:80px 24px;}
-    .hero::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23C9963A' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/svg%3E");pointer-events:none;}
-    .eyebrow{font-size:11px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);margin-bottom:22px;}
-    h1.brand{font-family:'Cinzel',serif;font-size:clamp(3rem,10vw,6.5rem);font-weight:700;color:#fff;letter-spacing:6px;line-height:1;margin-bottom:6px;}
-    h1.brand span{color:var(--gold);}
-    .sub{font-family:'Cinzel',serif;font-size:clamp(.9rem,2vw,1.1rem);letter-spacing:8px;color:var(--gold);margin-bottom:26px;}
-    .tagline{font-size:.95rem;color:var(--muted);font-style:italic;margin-bottom:40px;}
-    .hero-hrs{display:flex;gap:2px;justify-content:center;margin-bottom:40px;flex-wrap:wrap;}
-    .hb{background:rgba(201,150,58,.08);border:1px solid rgba(201,150,58,.25);padding:15px 28px;text-align:center;}
-    .hb:first-child{border-radius:4px 0 0 4px;}
-    .hb:last-child{border-radius:0 4px 4px 0;}
-    .hl{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:4px;}
-    .ht{font-family:'Cinzel',serif;font-size:1.15rem;color:#fff;}
-    .cta{display:inline-block;background:var(--gold);color:var(--dark);text-decoration:none;font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:700;padding:14px 38px;border-radius:2px;transition:all .25s;}
-    .cta:hover{background:var(--gold-light);transform:translateY(-1px);box-shadow:0 8px 30px rgba(201,150,58,.3);}
-    .scroll-hint{position:absolute;bottom:22px;left:50%;transform:translateX(-50%);color:var(--muted);font-size:10px;letter-spacing:3px;text-transform:uppercase;display:flex;flex-direction:column;align-items:center;gap:8px;}
-    .scroll-hint::after{content:'';width:1px;height:34px;background:linear-gradient(to bottom,var(--muted),transparent);}
+    .hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;position:relative;background:var(--dark2);padding:96px 24px;border-bottom:1px solid var(--line);}
+    .eyebrow{font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:26px;}
+    .hero-mark{margin-bottom:24px;opacity:.85;}
+    h1.brand{font-family:'Cormorant Garamond',serif;font-size:clamp(3.2rem,11vw,7rem);font-weight:600;color:var(--cream);letter-spacing:2px;line-height:.95;margin-bottom:10px;}
+    h1.brand span{color:var(--gold);font-style:italic;}
+    .sub{font-family:'Inter',sans-serif;font-size:clamp(.7rem,2vw,.8rem);letter-spacing:7px;color:var(--muted);text-transform:uppercase;margin-bottom:30px;}
+    .tagline{font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:var(--cream);font-style:italic;margin-bottom:46px;font-weight:500;}
+    .hero-hrs{display:flex;gap:0;justify-content:center;margin-bottom:46px;flex-wrap:wrap;border:1px solid var(--line);border-radius:3px;overflow:hidden;}
+    .hb{padding:18px 34px;text-align:center;}
+    .hb+.hb{border-left:1px solid var(--line);}
+    .hl{font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);margin-bottom:6px;}
+    .ht{font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:var(--cream);font-weight:600;}
+    .cta{display:inline-block;background:transparent;color:var(--gold);text-decoration:none;font-size:11px;letter-spacing:2.5px;text-transform:uppercase;font-weight:600;padding:15px 42px;border:1px solid var(--gold);border-radius:2px;transition:all .25s;}
+    .cta:hover{background:var(--gold);color:var(--dark);}
+    .scroll-hint{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);color:var(--muted);font-size:10px;letter-spacing:2.5px;text-transform:uppercase;display:flex;flex-direction:column;align-items:center;gap:8px;}
+    .scroll-hint::after{content:'';width:1px;height:34px;background:linear-gradient(to bottom,var(--gold),transparent);opacity:.5;}
 
     /* COMMON SECTION */
-    section{padding:86px 24px;}
-    .si{max-width:1000px;margin:0 auto;}
-    .sey{text-align:center;font-size:10px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);margin-bottom:9px;}
-    .stit{font-family:'Cinzel',serif;font-size:clamp(1.7rem,5vw,2.5rem);text-align:center;color:#fff;margin-bottom:13px;letter-spacing:2px;}
-    .srule{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:44px;}
-    .srule::before,.srule::after{content:'';height:1px;width:55px;background:var(--gold);opacity:.4;}
-    .srule span{color:var(--gold);font-size:15px;}
+    section{padding:96px 24px;}
+    .si{max-width:1040px;margin:0 auto;}
+    .sey{text-align:center;font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:12px;}
+    .stit{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,5vw,3rem);text-align:center;color:var(--cream);margin-bottom:18px;letter-spacing:1px;font-weight:600;}
+    .srule{display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:52px;}
+    .srule::before,.srule::after{content:'';height:1px;width:60px;background:var(--gold);opacity:.4;}
+    .srule span{color:var(--gold);font-size:10px;letter-spacing:2px;}
 
     /* HOURS */
     #hours{background:var(--dark3);}
-    .hgrid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(201,150,58,.15);border:1px solid rgba(201,150,58,.15);border-radius:4px;overflow:hidden;margin-bottom:18px;}
-    .hcard{background:var(--card);padding:38px 34px;text-align:center;}
-    .hcard .ic{font-size:26px;margin-bottom:12px;}
-    .hcard h3{font-family:'Cinzel',serif;font-size:.95rem;color:var(--gold);letter-spacing:3px;margin-bottom:9px;}
-    .hcard .t{font-family:'Playfair Display',serif;font-size:1.9rem;color:#fff;margin-bottom:6px;}
-    .hcard p{color:var(--muted);font-size:.84rem;}
-    .hnote{text-align:center;color:var(--muted);font-size:.84rem;font-style:italic;}
+    .hgrid{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--line);border-radius:3px;overflow:hidden;margin-bottom:22px;}
+    .hcard{background:var(--card);padding:46px 34px;text-align:center;}
+    .hcard+.hcard{border-left:1px solid var(--line);}
+    .hcard .ic{margin-bottom:18px;}
+    .hcard h3{font-family:'Inter',sans-serif;font-size:.72rem;color:var(--gold);letter-spacing:2.5px;text-transform:uppercase;margin-bottom:14px;font-weight:600;}
+    .hcard .t{font-family:'Cormorant Garamond',serif;font-size:2.2rem;color:var(--cream);margin-bottom:8px;font-weight:600;}
+    .hcard p{color:var(--muted);font-size:.86rem;}
+    .hnote{text-align:center;color:var(--muted);font-size:.86rem;font-style:italic;font-family:'Cormorant Garamond',serif;font-size:1.05rem;}
 
     /* MENU */
     #menu{background:var(--dark2);}
-    .tabs{display:flex;border:1px solid rgba(201,150,58,.3);border-radius:4px;overflow:hidden;max-width:480px;margin:0 auto 42px;}
-    .tb{flex:1;background:transparent;border:none;color:var(--muted);padding:12px 8px;cursor:pointer;font-family:'Inter',sans-serif;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;font-weight:500;transition:all .2s;border-right:1px solid rgba(201,150,58,.3);}
+    .tabs{display:flex;border:1px solid var(--line);border-radius:3px;overflow:hidden;max-width:520px;margin:0 auto 48px;}
+    .tb{flex:1;background:transparent;border:none;color:var(--muted);padding:14px 8px;cursor:pointer;font-family:'Inter',sans-serif;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;font-weight:500;transition:all .25s;border-right:1px solid var(--line);}
     .tb:last-child{border-right:none;}
-    .tb.on{background:var(--gold);color:var(--dark);font-weight:700;}
-    .tb:hover:not(.on){background:rgba(201,150,58,.1);color:var(--gold);}
+    .tb.on{background:var(--gold);color:var(--dark);font-weight:600;}
+    .tb:hover:not(.on){color:var(--gold);}
     .panel{display:none;}
     .panel.on{display:block;}
 
     /* STEAK FORM */
-    .sg3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:rgba(201,150,58,.15);border:1px solid rgba(201,150,58,.15);border-radius:4px 4px 0 0;overflow:hidden;}
-    .sg3b{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:rgba(201,150,58,.15);border:1px solid rgba(201,150,58,.15);border-top:none;border-radius:0 0 4px 4px;overflow:hidden;margin-bottom:3px;}
-    .fg{background:var(--card);padding:24px 20px;}
-    .fg h4{font-family:'Cinzel',serif;font-size:.7rem;letter-spacing:2px;color:var(--gold);text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:6px;}
-    .fg label{display:flex;align-items:center;gap:9px;margin-bottom:10px;cursor:pointer;color:var(--cream);font-size:.86rem;transition:color .2s;}
+    .sg3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;border:1px solid var(--line);border-radius:3px 3px 0 0;overflow:hidden;}
+    .sg3b{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;border:1px solid var(--line);border-top:none;border-radius:0 0 3px 3px;overflow:hidden;margin-bottom:22px;}
+    .fg{background:var(--card);padding:28px 24px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);}
+    .sg3 .fg:last-child,.sg3b .fg:last-child{border-right:none;}
+    .sg3b .fg{border-bottom:none;}
+    .fg h4{font-family:'Inter',sans-serif;font-size:.68rem;letter-spacing:2px;color:var(--gold);text-transform:uppercase;margin-bottom:18px;font-weight:600;display:flex;align-items:center;gap:8px;}
+    .fg label{display:flex;align-items:center;gap:11px;margin-bottom:12px;cursor:pointer;color:var(--cream);font-size:.88rem;transition:color .2s;}
     .fg label:hover{color:var(--gold);}
-    .fg input[type=checkbox],.fg input[type=radio]{appearance:none;width:14px;height:14px;border:1px solid rgba(201,150,58,.4);border-radius:2px;flex-shrink:0;position:relative;cursor:pointer;transition:all .2s;}
+    .fg input[type=checkbox],.fg input[type=radio]{appearance:none;width:15px;height:15px;border:1px solid var(--muted);border-radius:2px;flex-shrink:0;position:relative;cursor:pointer;transition:all .2s;}
     .fg input[type=radio]{border-radius:50%;}
     .fg input[type=checkbox]:checked,.fg input[type=radio]:checked{background:var(--gold);border-color:var(--gold);}
-    .fg input[type=checkbox]:checked::after{content:'✓';position:absolute;top:-2px;left:1px;font-size:10px;color:var(--dark);font-weight:bold;}
-    .fg input[type=radio]:checked::after{content:'';position:absolute;top:3px;left:3px;width:6px;height:6px;background:var(--dark);border-radius:50%;}
-    .incl{font-size:9px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-top:10px;padding-top:9px;border-top:1px solid rgba(201,150,58,.12);}
-    .fsh{font-family:'Cinzel',serif;font-size:.62rem;letter-spacing:2px;color:var(--gold);text-transform:uppercase;margin:12px 0 8px;display:flex;align-items:center;gap:5px;}
-    .sbar{background:rgba(139,26,26,.12);border:1px solid rgba(139,26,26,.3);border-radius:4px;padding:16px 20px;display:flex;align-items:center;gap:13px;margin-top:3px;}
-    .sbar strong{color:var(--gold);font-family:'Cinzel',serif;font-size:.75rem;letter-spacing:2px;display:block;margin-bottom:2px;}
-    .sbar p{color:var(--muted);font-size:.8rem;}
+    .fg input[type=checkbox]:checked::after{content:'';position:absolute;top:2px;left:5px;width:3px;height:7px;border:solid var(--dark);border-width:0 1.5px 1.5px 0;transform:rotate(45deg);}
+    .fg input[type=radio]:checked::after{content:'';position:absolute;top:4px;left:4px;width:5px;height:5px;background:var(--dark);border-radius:50%;}
+    .incl{font-size:9px;letter-spacing:1.5px;color:var(--muted);text-transform:uppercase;margin-top:14px;padding-top:12px;border-top:1px solid var(--line);}
+    .fsh{font-family:'Inter',sans-serif;font-size:.6rem;letter-spacing:1.5px;color:var(--gold);text-transform:uppercase;margin:16px 0 10px;font-weight:600;display:flex;align-items:center;gap:6px;}
+    .sbar{background:var(--card);border:1px solid var(--line);border-radius:3px;padding:22px 26px;display:flex;align-items:center;gap:18px;}
+    .sbar .ic{flex-shrink:0;}
+    .sbar strong{color:var(--gold);font-family:'Inter',sans-serif;font-size:.72rem;letter-spacing:2px;text-transform:uppercase;display:block;margin-bottom:5px;font-weight:600;}
+    .sbar p{color:var(--muted);font-size:.84rem;}
 
     /* DISH CARDS */
-    .g2{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(201,150,58,.15);border:1px solid rgba(201,150,58,.15);border-radius:4px;overflow:hidden;margin-bottom:3px;}
-    .g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:rgba(201,150,58,.15);border:1px solid rgba(201,150,58,.15);border-radius:4px;overflow:hidden;margin-bottom:20px;}
-    .dc{background:var(--card);padding:24px 22px;display:flex;flex-direction:column;gap:7px;position:relative;}
-    .dp{position:absolute;top:20px;right:18px;font-family:'Cinzel',serif;font-size:1.1rem;color:var(--gold);}
-    .dc h3{font-family:'Cinzel',serif;font-size:.9rem;color:#fff;letter-spacing:2px;padding-right:65px;}
-    .dw{font-size:.75rem;color:var(--gold);letter-spacing:1px;margin-top:-3px;}
+    .g2{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--line);border-radius:3px;overflow:hidden;}
+    .g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;border:1px solid var(--line);border-radius:3px;overflow:hidden;margin-bottom:24px;}
+    .dc{background:var(--card);padding:30px 26px;display:flex;flex-direction:column;gap:9px;position:relative;border-right:1px solid var(--line);border-bottom:1px solid var(--line);}
+    .g2 .dc,.g3 .dc{border-bottom:1px solid var(--line);}
+    .dp{position:absolute;top:28px;right:24px;font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:var(--gold);font-weight:600;}
+    .dc h3{font-family:'Cormorant Garamond',serif;font-size:1.45rem;color:var(--cream);letter-spacing:.5px;padding-right:70px;font-weight:600;text-transform:none;}
+    .dw{font-size:.78rem;color:var(--gold);letter-spacing:1px;margin-top:-5px;text-transform:uppercase;}
     .dc ul{list-style:none;}
-    .dc ul li{font-size:.82rem;color:var(--muted);padding:2px 0;display:flex;align-items:center;gap:6px;}
-    .dc ul li::before{content:'·';color:var(--gold);font-size:1.1rem;line-height:1;flex-shrink:0;}
-    .atag{font-size:.7rem;color:var(--muted);border-top:1px solid rgba(201,150,58,.1);padding-top:7px;margin-top:3px;}
-    .atag em{color:#c0553a;font-style:normal;}
-    .abox{background:var(--card);border:1px solid rgba(201,150,58,.12);border-radius:4px;padding:14px 20px;margin-top:3px;text-align:center;font-size:.78rem;color:var(--muted);}
-    .ssl{text-align:center;font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin:36px 0 16px;}
+    .dc ul li{font-size:.86rem;color:var(--muted);padding:3px 0;display:flex;align-items:flex-start;gap:8px;}
+    .dc ul li::before{content:'';width:4px;height:4px;background:var(--gold);border-radius:50%;margin-top:9px;flex-shrink:0;opacity:.7;}
+    .atag{font-size:.72rem;color:var(--muted);border-top:1px solid var(--line);padding-top:10px;margin-top:6px;}
+    .atag em{color:var(--gold-light);font-style:normal;}
+    .abox{background:var(--card);border:1px solid var(--line);border-radius:3px;padding:18px 22px;text-align:center;font-size:.8rem;color:var(--muted);}
+    .ssl{text-align:center;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin:44px 0 22px;}
 
     /* ABOUT */
     #about{background:var(--dark3);}
-    .g3a{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:rgba(201,150,58,.15);border-radius:4px;overflow:hidden;}
-    .ac{background:var(--card);padding:34px 24px;text-align:center;}
-    .ac .ic{font-size:28px;margin-bottom:12px;}
-    .ac h3{font-family:'Cinzel',serif;color:var(--gold);font-size:.78rem;letter-spacing:3px;margin-bottom:9px;}
-    .ac p{color:var(--muted);font-size:.83rem;}
+    .g3a{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;border:1px solid var(--line);border-radius:3px;overflow:hidden;}
+    .ac{background:var(--card);padding:42px 28px;text-align:center;}
+    .ac+.ac{border-left:1px solid var(--line);}
+    .ac .ic{margin-bottom:20px;}
+    .ac h3{font-family:'Cormorant Garamond',serif;color:var(--cream);font-size:1.35rem;letter-spacing:.5px;margin-bottom:14px;font-weight:600;}
+    .ac p{color:var(--muted);font-size:.86rem;}
 
     /* CONTACT */
     #contact{background:var(--dark2);}
-    .g3c{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:rgba(201,150,58,.15);border:1px solid rgba(201,150,58,.15);border-radius:4px;overflow:hidden;}
-    .cc{background:var(--card);padding:34px 24px;text-align:center;}
-    .cc .ic{font-size:24px;margin-bottom:11px;}
-    .cc h4{font-family:'Cinzel',serif;font-size:.7rem;letter-spacing:3px;color:var(--gold);margin-bottom:9px;}
-    .cc p{color:var(--cream);font-size:.88rem;line-height:1.7;}
+    .g3c{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;border:1px solid var(--line);border-radius:3px;overflow:hidden;}
+    .cc{background:var(--card);padding:42px 28px;text-align:center;}
+    .cc+.cc{border-left:1px solid var(--line);}
+    .cc .ic{margin-bottom:18px;}
+    .cc h4{font-family:'Inter',sans-serif;font-size:.7rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);margin-bottom:14px;font-weight:600;}
+    .cc p{color:var(--cream);font-size:.9rem;line-height:1.8;}
     .cc a{color:var(--gold);text-decoration:none;}
+    .cc a:hover{color:var(--gold-light);}
 
     /* FOOTER */
-    footer{background:var(--dark);border-top:1px solid rgba(201,150,58,.15);padding:34px 24px;text-align:center;}
-    footer .br{font-family:'Cinzel',serif;font-size:1rem;color:var(--gold);letter-spacing:4px;margin-bottom:7px;}
-    footer p{color:var(--muted);font-size:.77rem;letter-spacing:1px;}
+    footer{background:var(--dark);border-top:1px solid var(--line);padding:42px 24px;text-align:center;}
+    footer .br{font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--cream);letter-spacing:2px;margin-bottom:10px;font-weight:600;}
+    footer .br span{color:var(--gold);font-style:italic;}
+    footer p{color:var(--muted);font-size:.78rem;letter-spacing:.5px;}
+    footer p+p{margin-top:10px;}
 
     @media(max-width:700px){
       .sg3,.sg3b,.g2,.g3,.g3a,.g3c,.hgrid{grid-template-columns:1fr;}
-      nav{gap:10px;padding-right:90px;}
+      .hcard+.hcard,.ac+.ac,.cc+.cc{border-left:none;border-top:1px solid var(--line);}
+      .fg{border-right:none;}
+      .dc{border-right:none;}
+      nav{gap:14px;padding-right:96px;height:auto;padding-top:10px;padding-bottom:10px;}
       nav a{font-size:10px;letter-spacing:1px;}
+      section{padding:72px 20px;}
     }
   </style>
 </head>
@@ -162,7 +178,8 @@
 
 <section class="hero" id="hero">
   <p class="eyebrow">Finnsnes, Norge</p>
-<h1 class="brand">BIFF<span>HUSET</span></h1>
+  <svg class="ic-svg hero-mark" width="40" height="40" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2c-3 2-4.5 5-4.5 8 0 2.5 2 4.5 4.5 4.5s4.5-2 4.5-4.5c0-3-1.5-6-4.5-8z"/><path d="M12 14.5V22"/><path d="M8 22h8"/></svg>
+  <h1 class="brand">BIFF<span>HUSET</span></h1>
   <p class="sub">FINNSNES</p>
   <p class="tagline">
     <span class="no">God mat · God stemning · Kvalitet siden første bit</span>
@@ -186,16 +203,16 @@
   <div class="si">
     <p class="sey"><span class="no">Når vi er åpne</span><span class="en">When we're open</span></p>
     <h2 class="stit"><span class="no">Åpningstider</span><span class="en">Opening Hours</span></h2>
-    <div class="srule"><span>✦</span></div>
+    <div class="srule"><span>&#10022;</span></div>
     <div class="hgrid">
       <div class="hcard">
-        <div class="ic">☀️</div>
+        <div class="ic"><svg class="ic-svg" width="30" height="30" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M19.1 4.9L17 7M7 17l-2.1 2.1"/></svg></div>
         <h3><span class="no">Lunsj</span><span class="en">Lunch</span></h3>
         <div class="t">11:00 – 15:00</div>
         <p><span class="no">Mandag – Søndag</span><span class="en">Monday – Sunday</span></p>
       </div>
       <div class="hcard">
-        <div class="ic">🌙</div>
+        <div class="ic"><svg class="ic-svg" width="30" height="30" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></div>
         <h3><span class="no">Middag / À La Carte</span><span class="en">Dinner / À La Carte</span></h3>
         <div class="t">15:00 – 22:00</div>
         <p><span class="no">Kjøkkenet stenger kl. 21:30</span><span class="en">Kitchen closes at 21:30</span></p>
@@ -209,7 +226,7 @@
   <div class="si">
     <p class="sey"><span class="no">Vår meny</span><span class="en">Our menu</span></p>
     <h2 class="stit"><span class="no">Mat & Drikke</span><span class="en">Food & Drinks</span></h2>
-    <div class="srule"><span>✦</span></div>
+    <div class="srule"><span>&#10022;</span></div>
     <div class="tabs">
       <button class="tb on" onclick="showTab('biff',this)"><span class="no">Biffmeny</span><span class="en">Steak Menu</span></button>
       <button class="tb" onclick="showTab('alacarte',this)">À La Carte</button>
@@ -219,7 +236,7 @@
     <div class="panel on" id="tab-biff">
       <div class="sg3">
         <div class="fg">
-          <h4>🥩 <span class="no">Velg Kjøtt</span><span class="en">Choose Meat</span></h4>
+          <h4><span class="no">Velg Kjøtt</span><span class="en">Choose Meat</span></h4>
           <label><input type="radio" name="kj"> Indrefilet</label>
           <label><input type="radio" name="kj"> Entrecôte</label>
           <label><input type="radio" name="kj"> Ytrefilet</label>
@@ -227,13 +244,13 @@
           <label><input type="radio" name="kj"> Biffsnadder</label>
         </div>
         <div class="fg">
-          <h4>⚖️ <span class="no">Velg Størrelse</span><span class="en">Choose Size</span></h4>
+          <h4><span class="no">Velg Størrelse</span><span class="en">Choose Size</span></h4>
           <label><input type="radio" name="st"> 200g</label>
           <label><input type="radio" name="st"> 300g</label>
           <label><input type="radio" name="st"> 400g</label>
         </div>
         <div class="fg">
-          <h4>🔥 <span class="no">Velg Stekegrad</span><span class="en">Choose Doneness</span></h4>
+          <h4><span class="no">Velg Stekegrad</span><span class="en">Choose Doneness</span></h4>
           <label><input type="radio" name="sg"> <span class="no">Rød (blodig)</span><span class="en">Rare</span></label>
           <label><input type="radio" name="sg"> <span class="no">Rosa (medium rare)</span><span class="en">Medium rare</span></label>
           <label><input type="radio" name="sg"> Medium</label>
@@ -242,7 +259,7 @@
       </div>
       <div class="sg3b">
         <div class="fg">
-          <h4>🥔 <span class="no">Velg Potet</span><span class="en">Choose Potato</span></h4>
+          <h4><span class="no">Velg Potet</span><span class="en">Choose Potato</span></h4>
           <label><input type="checkbox"> <span class="no">Fløtegratinerte poteter</span><span class="en">Gratin potatoes</span></label>
           <label><input type="checkbox"> <span class="no">Ovnsbakte småpoteter</span><span class="en">Oven-baked potatoes</span></label>
           <label><input type="checkbox"> <span class="no">Potetpuré</span><span class="en">Mashed potatoes</span></label>
@@ -250,7 +267,7 @@
           <p class="incl"><span class="no">1 potet inkludert</span><span class="en">1 potato included</span></p>
         </div>
         <div class="fg">
-          <h4>🫙 <span class="no">Velg Saus</span><span class="en">Choose Sauce</span></h4>
+          <h4><span class="no">Velg Saus</span><span class="en">Choose Sauce</span></h4>
           <label><input type="checkbox"> Bearnaisesaus</label>
           <label><input type="checkbox"> Peppersaus</label>
           <label><input type="checkbox"> Rødvinssaus</label>
@@ -259,20 +276,20 @@
           <p class="incl"><span class="no">1 saus inkludert</span><span class="en">1 sauce included</span></p>
         </div>
         <div class="fg">
-          <h4>🌽 <span class="no">Tilbehør (inkl.)</span><span class="en">Sides (incl.)</span></h4>
+          <h4><span class="no">Tilbehør (inkl.)</span><span class="en">Sides (incl.)</span></h4>
           <label><input type="checkbox"> Maiskolbe</label>
           <label><input type="checkbox"> Brokkolini</label>
           <label><input type="checkbox"> Tomat</label>
-          <div class="fsh">🍄 <span class="no">Ekstra grønnsaker</span><span class="en">Extra vegetables</span></div>
+          <div class="fsh"><span class="no">Ekstra grønnsaker</span><span class="en">Extra vegetables</span></div>
           <label><input type="checkbox"> Asparges</label>
           <label><input type="checkbox"> Sopp</label>
-          <div class="fsh">🧈 <span class="no">Kryddersmør</span><span class="en">Herb butter</span> <span style="color:var(--red);font-size:9px">(<span class="no">ikke inkl.</span><span class="en">not incl.</span>)</span></div>
+          <div class="fsh"><span class="no">Kryddersmør</span><span class="en">Herb butter</span> <span style="color:var(--red);font-size:9px">(<span class="no">ikke inkl.</span><span class="en">not incl.</span>)</span></div>
           <label><input type="checkbox"> Hvitløkssmør</label>
           <label><input type="checkbox"> Chilismør</label>
         </div>
       </div>
       <div class="sbar">
-        <div style="font-size:22px">🥗</div>
+        <div class="ic"><svg class="ic-svg" width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11h18a8 8 0 0 1-16 0"/><path d="M5 11a7 7 0 0 1 14 0"/><path d="M7 17h10l-1 4H8z"/></svg></div>
         <div>
           <strong><span class="no">SALATBAR – FORSYN DEG SÅ MYE DU VIL</span><span class="en">SALAD BAR – HELP YOURSELF AS MUCH AS YOU LIKE</span></strong>
           <p><span class="no">Salatbaren er ikke inkludert i prisen. 1 potet og 1 saus er inkludert.</span><span class="en">Salad bar not included. 1 potato and 1 sauce are included.</span></p>
@@ -282,35 +299,35 @@
 
     <div class="panel" id="tab-alacarte">
       <div class="g2">
-        <div class="dc"><div class="dp">395,-</div><h3>HUSETS FAVORITT</h3><div class="dw">200g Entrecôte</div><ul><li><span class="no">Fløtegratinerte poteter</span><span class="en">Gratin potatoes</span></li><li>Bearnaisesaus</li><li>Hvitløkssmør</li></ul><div class="atag"><span class="no">Allergener:</span><span class="en">Allergens:</span> <em>Melk, Egg</em></div></div>
-        <div class="dc"><div class="dp">420,-</div><h3>PEPPER KING</h3><div class="dw">200g Ytrefilet</div><ul><li><span class="no">Ovnsbakte småpoteter</span><span class="en">Oven-baked potatoes</span></li><li>Peppersaus</li><li>Chilismør</li></ul><div class="atag"><span class="no">Allergener:</span><span class="en">Allergens:</span> <em>Melk</em></div></div>
-        <div class="dc"><div class="dp">375,-</div><h3>PLANKESTEK</h3><div class="dw">200g Ytrefilet</div><ul><li><span class="no">Serveres på planke</span><span class="en">Served on a plank</span></li><li><span class="no">Potetpuré</span><span class="en">Mashed potatoes</span></li><li><span class="no">Bearnaise- og peppersaus</span><span class="en">Béarnaise & pepper sauce</span></li></ul><div class="atag"><span class="no">Allergener:</span><span class="en">Allergens:</span> <em>Melk, Egg</em></div></div>
-        <div class="dc"><div class="dp">425,-</div><h3>LAMMECARRÉ</h3><div class="dw">200g</div><ul><li><span class="no">Fløtegratinerte poteter</span><span class="en">Gratin potatoes</span></li><li><span class="no">Sesongens grønnsaker</span><span class="en">Seasonal vegetables</span></li><li>Rødvinssaus</li></ul><div class="atag"><span class="no">Allergener:</span><span class="en">Allergens:</span> <em>Melk</em></div></div>
-        <div class="dc" style="grid-column:1/-1"><div class="dp">355,-</div><h3>SPARERIBS</h3><div class="dw">&nbsp;</div><ul><li><span class="no">Ovnsbakte småpoteter</span><span class="en">Oven-baked potatoes</span></li><li>Maiskolbe</li><li>Coleslaw</li><li><span class="no">Husets BBQ-saus</span><span class="en">House BBQ sauce</span></li></ul><div class="atag"><span class="no">Allergener:</span><span class="en">Allergens:</span> <em>Egg, Sennep</em></div></div>
+        <div class="dc"><div class="dp">395,-</div><h3>Husets Favoritt</h3><div class="dw">200g Entrecôte</div><ul><li><span class="no">Fløtegratinerte poteter</span><span class="en">Gratin potatoes</span></li><li>Bearnaisesaus</li><li>Hvitløkssmør</li></ul><div class="atag"><span class="no">Allergener:</span><span class="en">Allergens:</span> <em>Melk, Egg</em></div></div>
+        <div class="dc"><div class="dp">420,-</div><h3>Pepper King</h3><div class="dw">200g Ytrefilet</div><ul><li><span class="no">Ovnsbakte småpoteter</span><span class="en">Oven-baked potatoes</span></li><li>Peppersaus</li><li>Chilismør</li></ul><div class="atag"><span class="no">Allergener:</span><span class="en">Allergens:</span> <em>Melk</em></div></div>
+        <div class="dc"><div class="dp">375,-</div><h3>Plankestek</h3><div class="dw">200g Ytrefilet</div><ul><li><span class="no">Serveres på planke</span><span class="en">Served on a plank</span></li><li><span class="no">Potetpuré</span><span class="en">Mashed potatoes</span></li><li><span class="no">Bearnaise- og peppersaus</span><span class="en">Béarnaise & pepper sauce</span></li></ul><div class="atag"><span class="no">Allergener:</span><span class="en">Allergens:</span> <em>Melk, Egg</em></div></div>
+        <div class="dc"><div class="dp">425,-</div><h3>Lammecarré</h3><div class="dw">200g</div><ul><li><span class="no">Fløtegratinerte poteter</span><span class="en">Gratin potatoes</span></li><li><span class="no">Sesongens grønnsaker</span><span class="en">Seasonal vegetables</span></li><li>Rødvinssaus</li></ul><div class="atag"><span class="no">Allergener:</span><span class="en">Allergens:</span> <em>Melk</em></div></div>
+        <div class="dc" style="grid-column:1/-1"><div class="dp">355,-</div><h3>Spareribs</h3><div class="dw">&nbsp;</div><ul><li><span class="no">Ovnsbakte småpoteter</span><span class="en">Oven-baked potatoes</span></li><li>Maiskolbe</li><li>Coleslaw</li><li><span class="no">Husets BBQ-saus</span><span class="en">House BBQ sauce</span></li></ul><div class="atag"><span class="no">Allergener:</span><span class="en">Allergens:</span> <em>Egg, Sennep</em></div></div>
       </div>
-      <div class="abox">🌾 <span class="no">Gluten</span><span class="en">Gluten</span> &nbsp;·&nbsp; 🥛 Melk &nbsp;·&nbsp; 🥚 Egg &nbsp;·&nbsp; 🌿 Sennep &nbsp;·&nbsp; ⭕ Sesam &nbsp;&nbsp; — &nbsp; <span class="no">Spør betjeningen ved allergier.</span><span class="en">Ask staff about allergies.</span></div>
+      <div class="abox" style="margin-top:24px"><span class="no">Gluten · Melk · Egg · Sennep · Sesam</span><span class="en">Gluten · Milk · Egg · Mustard · Sesame</span> &nbsp; — &nbsp; <span class="no">Spør betjeningen ved allergier.</span><span class="en">Ask staff about allergies.</span></div>
     </div>
 
     <div class="panel" id="tab-barn">
       <p class="ssl"><span class="no">Barnemeny</span><span class="en">Kids' Menu</span></p>
       <div class="g3">
-        <div class="dc"><div class="dp">149,-</div><h3>GRILLSPYD</h3><ul><li><span class="no">Velg kylling eller biff</span><span class="en">Chicken or beef</span></li><li><span class="no">Valgfri potet</span><span class="en">Potato of choice</span></li></ul><div class="atag"><em><span class="no">Ingen kjente allergener</span><span class="en">No known allergens</span></em></div></div>
-        <div class="dc"><div class="dp">149,-</div><h3>HAMBURGER</h3><ul><li><span class="no">Saftig hamburger</span><span class="en">Juicy hamburger</span></li><li><span class="no">Valgfri potet</span><span class="en">Potato of choice</span></li></ul><div class="atag"><span class="no">Allergener:</span><span class="en">Allergens:</span> <em>Gluten, Melk, Sesam</em></div></div>
-        <div class="dc"><div class="dp">149,-</div><h3>BIFFSNADDER</h3><ul><li><span class="no">Mørt biffkjøtt med stekt løk og paprika</span><span class="en">Tender beef, fried onion & peppers</span></li><li><span class="no">Valgfri potet og saus</span><span class="en">Potato & sauce of choice</span></li></ul><div class="atag"><em><span class="no">Avhenger av valgt saus</span><span class="en">Depends on sauce</span></em></div></div>
+        <div class="dc"><div class="dp">149,-</div><h3>Grillspyd</h3><ul><li><span class="no">Velg kylling eller biff</span><span class="en">Chicken or beef</span></li><li><span class="no">Valgfri potet</span><span class="en">Potato of choice</span></li></ul><div class="atag"><em><span class="no">Ingen kjente allergener</span><span class="en">No known allergens</span></em></div></div>
+        <div class="dc"><div class="dp">149,-</div><h3>Hamburger</h3><ul><li><span class="no">Saftig hamburger</span><span class="en">Juicy hamburger</span></li><li><span class="no">Valgfri potet</span><span class="en">Potato of choice</span></li></ul><div class="atag"><span class="no">Allergener:</span><span class="en">Allergens:</span> <em>Gluten, Melk, Sesam</em></div></div>
+        <div class="dc"><div class="dp">149,-</div><h3>Biffsnadder</h3><ul><li><span class="no">Mørt biffkjøtt med stekt løk og paprika</span><span class="en">Tender beef, fried onion & peppers</span></li><li><span class="no">Valgfri potet og saus</span><span class="en">Potato & sauce of choice</span></li></ul><div class="atag"><em><span class="no">Avhenger av valgt saus</span><span class="en">Depends on sauce</span></em></div></div>
       </div>
       <p class="ssl">Dessert</p>
       <div class="g2" style="grid-template-columns:1fr;">
-        <div class="dc" style="flex-direction:row;align-items:center;gap:22px;flex-wrap:wrap;">
+        <div class="dc" style="flex-direction:row;align-items:center;gap:24px;flex-wrap:wrap;">
           <div style="flex:1;min-width:160px">
             <div class="dp">105,-</div>
-            <h3>PANNA COTTA</h3>
+            <h3>Panna Cotta</h3>
             <ul>
               <li><span class="no">Klassisk panna cotta</span><span class="en">Classic panna cotta</span></li>
               <li><span class="no">Servert med bærcoulis</span><span class="en">Served with berry coulis</span></li>
             </ul>
             <div class="atag"><span class="no">Allergener:</span><span class="en">Allergens:</span> <em>Melk</em></div>
           </div>
-          <div style="font-size:52px;opacity:.65">🍮</div>
+          <svg class="ic-svg" width="48" height="48" viewBox="0 0 24 24" aria-hidden="true" style="opacity:.6"><path d="M5 11h14a7 7 0 0 1-14 0z"/><path d="M7 17h10l-1 3H8z"/><path d="M12 4v3M9 5.5l1 2M15 5.5l-1 2"/></svg>
         </div>
       </div>
     </div>
@@ -321,11 +338,11 @@
   <div class="si">
     <p class="sey"><span class="no">Hvem vi er</span><span class="en">Who we are</span></p>
     <h2 class="stit"><span class="no">Om Biffhuset</span><span class="en">About Biffhuset</span></h2>
-    <div class="srule"><span>✦</span></div>
+    <div class="srule"><span>&#10022;</span></div>
     <div class="g3a">
-      <div class="ac"><div class="ic">🥩</div><h3><span class="no">Kvalitetskjøtt</span><span class="en">Quality Meat</span></h3><p><span class="no">Vi serverer kun det beste kjøttet, tilberedt med omhu av erfarne kokker.</span><span class="en">Only the finest cuts, prepared with care by our experienced chefs.</span></p></div>
-      <div class="ac"><div class="ic">🌟</div><h3><span class="no">God Stemning</span><span class="en">Great Atmosphere</span></h3><p><span class="no">Stedet for minnerike middager, familiesammenkomster og gode stunder i Finnsnes.</span><span class="en">The place for memorable dinners, family gatherings, and great moments in Finnsnes.</span></p></div>
-      <div class="ac"><div class="ic">🏆</div><h3><span class="no">Siden første bit</span><span class="en">Since the first bite</span></h3><p><span class="no">Kvalitet er ikke bare et løfte – det er vår standard. Hver rett lages med lidenskap.</span><span class="en">Quality isn't just a promise – it's our standard. Every dish made with passion.</span></p></div>
+      <div class="ac"><div class="ic"><svg class="ic-svg" width="30" height="30" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11h18a8 8 0 0 1-16 0"/><path d="M5 11a7 7 0 0 1 14 0"/><path d="M7 17h10l-1 4H8z"/></svg></div><h3><span class="no">Kvalitetskjøtt</span><span class="en">Quality Meat</span></h3><p><span class="no">Vi serverer kun det beste kjøttet, tilberedt med omhu av erfarne kokker.</span><span class="en">Only the finest cuts, prepared with care by our experienced chefs.</span></p></div>
+      <div class="ac"><div class="ic"><svg class="ic-svg" width="30" height="30" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.4 5 5.6.7-4 3.9 1 5.5-5-2.7-5 2.7 1-5.5-4-3.9 5.6-.7z"/></svg></div><h3><span class="no">God Stemning</span><span class="en">Great Atmosphere</span></h3><p><span class="no">Stedet for minnerike middager, familiesammenkomster og gode stunder i Finnsnes.</span><span class="en">The place for memorable dinners, family gatherings, and great moments in Finnsnes.</span></p></div>
+      <div class="ac"><div class="ic"><svg class="ic-svg" width="30" height="30" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 21h8M12 17v4M7 4h10v4a5 5 0 0 1-10 0z"/><path d="M17 5h2a2 2 0 0 1 0 4h-2M7 5H5a2 2 0 0 0 0 4h2"/></svg></div><h3><span class="no">Siden første bit</span><span class="en">Since the first bite</span></h3><p><span class="no">Kvalitet er ikke bare et løfte – det er vår standard. Hver rett lages med lidenskap.</span><span class="en">Quality isn't just a promise – it's our standard. Every dish made with passion.</span></p></div>
     </div>
   </div>
 </section>
@@ -334,11 +351,11 @@
   <div class="si">
     <p class="sey"><span class="no">Finn oss</span><span class="en">Find us</span></p>
     <h2 class="stit"><span class="no">Kontakt & Adresse</span><span class="en">Contact & Location</span></h2>
-    <div class="srule"><span>✦</span></div>
+    <div class="srule"><span>&#10022;</span></div>
     <div class="g3c">
-      <div class="cc"><div class="ic">📍</div><h4><span class="no">Adresse</span><span class="en">Address</span></h4><p>Finnsnes<br>Troms, Norge</p></div>
+      <div class="cc"><div class="ic"><svg class="ic-svg" width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-5.2-7-11a7 7 0 0 1 14 0c0 5.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></div><h4><span class="no">Adresse</span><span class="en">Address</span></h4><p>Finnsnes<br>Troms, Norge</p></div>
       <div class="cc">
-        <div class="ic">📞</div>
+        <div class="ic"><svg class="ic-svg" width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg></div>
         <h4><span class="no">Telefon & Åpningstider</span><span class="en">Phone & Hours</span></h4>
         <p>
           <a href="tel:+4748047988">+47 480 47 988</a><br><br>
@@ -347,15 +364,15 @@
           <span style="font-size:.78rem;color:var(--muted)"><span class="no">Kjøkken stenger 21:30</span><span class="en">Kitchen closes 21:30</span></span>
         </p>
       </div>
-      <div class="cc"><div class="ic">✉️</div><h4><span class="no">Følg oss</span><span class="en">Follow us</span></h4><p><span class="no">Finn oss på Facebook og Instagram for nyheter og tilbud.</span><span class="en">Find us on Facebook and Instagram for news and offers.</span></p></div>
+      <div class="cc"><div class="ic"><svg class="ic-svg" width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></div><h4><span class="no">Følg oss</span><span class="en">Follow us</span></h4><p><span class="no">Finn oss på Facebook og Instagram for nyheter og tilbud.</span><span class="en">Find us on Facebook and Instagram for news and offers.</span></p></div>
     </div>
   </div>
 </section>
 
 <footer>
-  <div class="br">BIFFHUSET FINNSNES</div>
+  <div class="br">BIFF<span>HUSET</span> FINNSNES</div>
   <p><span class="no">God mat · God stemning · Kvalitet siden første bit</span><span class="en">Great food · Great atmosphere · Quality since the first bite</span></p>
-  <p style="margin-top:9px">© 2026 Biffhuset Finnsnes</p>
+  <p>© 2026 Biffhuset Finnsnes</p>
 </footer>
 
 <script>
