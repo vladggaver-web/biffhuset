@@ -96,7 +96,7 @@
 
     /* HOURS */
     #hours{background:transparent;}
-    .hgrid{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--line);border-radius:3px;overflow:hidden;margin-bottom:22px;}
+    .hgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--line);border-radius:3px;overflow:hidden;margin-bottom:22px;}
     .hcard{background:var(--card);padding:48px 34px;text-align:center;}
     .hcard+.hcard{border-left:1px solid var(--line);}
     .hcard .ic{margin-bottom:18px;}
@@ -179,6 +179,8 @@
     .cc p{color:var(--cream);font-size:.9rem;line-height:1.8;}
     .cc a{color:var(--gold);text-decoration:none;}
     .cc a:hover{color:var(--gold-light);}
+    .fb-link{display:inline-block;margin-top:16px;padding:9px 20px;border:1px solid var(--line);border-radius:3px;font-size:.72rem;letter-spacing:1.5px;text-transform:uppercase;transition:background .25s,border-color .25s;}
+    .fb-link:hover{background:rgba(194,160,107,.08);border-color:var(--gold);}
     .mapwrap{border:1px solid var(--line);border-radius:3px;overflow:hidden;}
     .mapwrap iframe{display:block;width:100%;height:300px;border:0;filter:grayscale(.4) brightness(.85);}
 
@@ -189,6 +191,8 @@
     footer .br span{color:var(--gold);font-style:italic;}
     footer p{color:var(--muted);font-size:.78rem;letter-spacing:.5px;}
     footer p+p{margin-top:10px;}
+    footer .foot-fb{color:var(--gold);text-decoration:none;font-size:.78rem;letter-spacing:1.5px;text-transform:uppercase;border-bottom:1px solid var(--line);padding-bottom:2px;transition:color .25s,border-color .25s;}
+    footer .foot-fb:hover{color:var(--gold-light);border-color:var(--gold);}
 
     @media(max-width:700px){
       .sg3,.sg3b,.g2,.g3,.g3a,.g3c,.hgrid{grid-template-columns:1fr;}
@@ -232,7 +236,7 @@
     </div>
     <div class="hb">
       <div class="hl"><span class="no">Middag</span><span class="en">Dinner</span></div>
-      <div class="ht">15:00 – 22:00</div>
+      <div class="ht">15:00 – 23:00</div>
     </div>
   </div>
   <a href="#menu" class="cta"><span class="no">Se Menyen</span><span class="en">View Menu</span></a>
@@ -249,13 +253,19 @@
         <div class="ic"><svg class="ic-svg" width="30" height="30" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M19.1 4.9L17 7M7 17l-2.1 2.1"/></svg></div>
         <h3><span class="no">Lunsj</span><span class="en">Lunch</span></h3>
         <div class="t">11:00 – 15:00</div>
-        <p><span class="no">Mandag – Søndag</span><span class="en">Monday – Sunday</span></p>
+        <p><span class="no">Mandag – Lørdag</span><span class="en">Monday – Saturday</span></p>
       </div>
       <div class="hcard">
         <div class="ic"><svg class="ic-svg" width="30" height="30" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></div>
         <h3><span class="no">Middag / À La Carte</span><span class="en">Dinner / À La Carte</span></h3>
-        <div class="t">15:00 – 22:00</div>
-        <p><span class="no">Kjøkkenet stenger kl. 21:30</span><span class="en">Kitchen closes at 21:30</span></p>
+        <div class="t">15:00 – 23:00</div>
+        <p><span class="no">Man – Lør · Kjøkkenet stenger kl. 22:00</span><span class="en">Mon – Sat · Kitchen closes at 22:00</span></p>
+      </div>
+      <div class="hcard">
+        <div class="ic"><svg class="ic-svg" width="30" height="30" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"/><circle cx="12" cy="12" r="4"/></svg></div>
+        <h3><span class="no">Søndag</span><span class="en">Sunday</span></h3>
+        <div class="t">15:00 – 21:00</div>
+        <p><span class="no">Kjøkkenet stenger kl. 20:00</span><span class="en">Kitchen closes at 20:00</span></p>
       </div>
     </div>
     <p class="hnote"><span class="no">À La Carte-menyen gjelder fra kl. 15:00</span><span class="en">À La Carte menu available from 15:00</span></p>
@@ -409,11 +419,12 @@
         <p>
           <a href="tel:+4748047988">+47 480 47 988</a><br><br>
           <span class="no">Lunsj:</span><span class="en">Lunch:</span> 11:00–15:00<br>
-          <span class="no">Middag:</span><span class="en">Dinner:</span> 15:00–22:00<br>
-          <span style="font-size:.78rem;color:var(--muted)"><span class="no">Kjøkken stenger 21:30</span><span class="en">Kitchen closes 21:30</span></span>
+          <span class="no">Middag (Man–Lør):</span><span class="en">Dinner (Mon–Sat):</span> 15:00–23:00<br>
+          <span class="no">Søndag:</span><span class="en">Sunday:</span> 15:00–21:00<br>
+          <span style="font-size:.78rem;color:var(--muted)"><span class="no">Kjøkken stenger kl. 22:00 (søn. 20:00)</span><span class="en">Kitchen closes at 22:00 (Sun. 20:00)</span></span>
         </p>
       </div>
-      <div class="cc"><div class="ic"><svg class="ic-svg" width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></div><h4><span class="no">Følg oss</span><span class="en">Follow us</span></h4><p><span class="no">Finn oss på Facebook og Instagram for nyheter og tilbud.</span><span class="en">Find us on Facebook and Instagram for news and offers.</span></p></div>
+      <div class="cc"><div class="ic"><svg class="ic-svg" width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></div><h4><span class="no">Følg oss</span><span class="en">Follow us</span></h4><p><span class="no">Finn oss på Facebook for nyheter og tilbud.</span><span class="en">Find us on Facebook for news and offers.</span></p><a class="fb-link" href="https://www.facebook.com/profile.php?id=61592085141751" target="_blank" rel="noopener noreferrer"><span class="no">Besøk vår Facebook-side</span><span class="en">Visit our Facebook page</span></a></div>
     </div>
     <div class="mapwrap">
       <iframe title="Kart - Biffhuset Finnsnes" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=Torggata%2017,%209300%20Finnsnes,%20Norway&output=embed"></iframe>
@@ -426,6 +437,7 @@
   <div class="br">BIFF<span>HUSET</span> FINNSNES</div>
   <p>Torggata 17 · 9300 Finnsnes · <span class="no">Norge</span><span class="en">Norway</span></p>
   <p><span class="no">God mat · God stemning · Kvalitet siden første bit</span><span class="en">Great food · Great atmosphere · Quality since the first bite</span></p>
+  <p><a class="foot-fb" href="https://www.facebook.com/profile.php?id=61592085141751" target="_blank" rel="noopener noreferrer">Facebook</a></p>
   <p>© 2026 Biffhuset Finnsnes</p>
 </footer>
 
